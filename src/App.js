@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import { Map } from './components/map/Map';
 import { Weather } from './components/weather/weather';
+import { Movies } from './components/movies/movies';
 
 function App() {
 	const [searchQuery, setSearchQuery] = useState('');
@@ -10,6 +11,7 @@ function App() {
 	const [locationMap, setLocationMap] = useState('');
 	const [locationWeather, setLocationWeather] = useState('');
 	const [locationWeatherData, setLocationWeatherData] = useState('');
+	const [moviesData, setMoviesData] = useState([]);
 	const [reset, setReset] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 
@@ -24,6 +26,7 @@ function App() {
 		setLocationMap('');
 		setLocationWeather('');
 		setLocationWeatherData('');
+		setMoviesData([]);
 		setErrorMsg('');
 		setReset(false);
 	};
@@ -38,6 +41,7 @@ function App() {
 			setLocation(data.data[0]);
 			getMap(data);
 			getWeather(data);
+			getMovies(data);
 			setErrorMsg('');
 			setReset(true);
 		} catch (error) {
@@ -59,13 +63,15 @@ function App() {
 			setLocationMap(map.config.url);
 		} catch (error) {
 			console.error(error);
+			setErrorMsg('Map not found: ' + error.message);
+			setReset(true);
 		}
 	};
 
 	const getWeather = async (data) => {
 		try {
 			let city = data.data[0].display_name.split(',')[0];
-			console.log(city);
+			// console.log(city);
 			const API3 = `http://localhost:8080/weather?city=${city}`;
 			const weather = await axios.get(API3);
 			// console.log(weather.data.location);
@@ -74,6 +80,24 @@ function App() {
 			setLocationWeather(weather.data.current);
 		} catch (error) {
 			console.error(error);
+			setErrorMsg('Weather not found: ' + error.message);
+			setReset(true);
+		}
+	};
+
+	const getMovies = async (data) => {
+		// https://image.tmdb.org/t/p/original/1E5gNpiBd7gUUNxXEHWBGTBRsOT.jpg
+		try {
+			let city = data.data[0].display_name.split(',')[0];
+			// console.log('Movies: ', city);
+			const API4 = `http://localhost:8080/movies?city=${city}`;
+			const movies = await axios.get(API4);
+			console.log(movies.data.results);
+			setMoviesData(movies.data.results);
+		} catch (error) {
+			console.error(error);
+			setErrorMsg('Movies not found: ' + error.message);
+			setReset(true);
 		}
 	};
 
@@ -112,6 +136,7 @@ function App() {
 				locationWeather={locationWeather}
 				locationWeatherData={locationWeatherData}
 			/>
+			<Movies moviesData={moviesData} />
 		</div>
 	);
 }
