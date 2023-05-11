@@ -1,0 +1,24 @@
+h3 {
+	font-size: 1.5rem;
+	color: gray;
+}
+
+h3 span {
+	font-style: italic;
+	font-weight: 700;
+	color: black;
+}
+
+p {
+	margin-top: 1.5rem;
+}
+
+.weather-container {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.weather-container p {
+	margin-top: 0.7rem;
+}
