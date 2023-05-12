@@ -59,7 +59,7 @@ function App() {
 
 			const API2 = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_ACCESS_TOKEN}&center=${lat},${lon}&size=600x600&zoom=12&path=fillcolor:%2390EE90|weight:2|color:blue|17.452945,78.380055|17.452765,78.382026|17.452020,78.381375|17.452045,78.380846|17.452945,78.380055`;
 			const map = await axios.get(API2);
-			// console.log(map.config.url);
+			// console.log(map.config.url) ;
 			setLocationMap(map.config.url);
 		} catch (error) {
 			console.error(error);
@@ -70,9 +70,11 @@ function App() {
 
 	const getWeather = async (data) => {
 		try {
+			const URL = process.env.REACT_APP_URL;
+
 			let city = data.data[0].display_name.split(',')[0];
 			// console.log(city);
-			const API3 = `http://localhost:8080/weather?city=${city}`;
+			const API3 = `${URL}weather?city=${city}`;
 			const weather = await axios.get(API3);
 			// console.log(weather.data.location);
 			setLocationWeatherData(weather.data.location);
@@ -88,9 +90,11 @@ function App() {
 	const getMovies = async (data) => {
 		// https://image.tmdb.org/t/p/original/1E5gNpiBd7gUUNxXEHWBGTBRsOT.jpg
 		try {
+			const URL = process.env.REACT_APP_URL;
+
 			let city = data.data[0].display_name.split(',')[0];
 			// console.log('Movies: ', city);
-			const API4 = `http://localhost:8080/movies?city=${city}`;
+			const API4 = `${URL}movies?city=${city}`;
 			const movies = await axios.get(API4);
 			// console.log(movies.data.results);
 			setMoviesData(movies.data.results);
