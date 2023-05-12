@@ -3,7 +3,7 @@ import './movie.css';
 
 export const Movie = ({ movie }) => {
 	return (
-		<div key={movie.id} className="movie-card">
+		<div className="movie-card">
 			<div className="card-image">
 				{movie.poster_path && (
 					<img
