@@ -92,7 +92,7 @@ function App() {
 			// console.log('Movies: ', city);
 			const API4 = `http://localhost:8080/movies?city=${city}`;
 			const movies = await axios.get(API4);
-			console.log(movies.data.results);
+			// console.log(movies.data.results);
 			setMoviesData(movies.data.results);
 		} catch (error) {
 			console.error(error);

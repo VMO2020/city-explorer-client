@@ -1,10 +1,14 @@
+.main-container {
+	background-color: whitesmoke;
+}
+
 .movies-container {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-	background-color: whitesmoke;
-	margin-top: 1rem;
+
+	margin-top: 3rem;
 	padding: 0.5rem;
 }

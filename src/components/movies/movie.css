@@ -7,7 +7,9 @@
 	width: 320px;
 	max-width: 100%;
 	padding: 0.5rem;
+	background-color: white;
 	border: 1px solid black;
+	box-shadow: 3px 3px 5px black;
 }
 
 .card-image {
